@@ -6,32 +6,23 @@ export default class Header extends Component{
         return (
             <View style={styles.container}>
                     <Icon
-  name="logo-instagram"
-  color="blue"
-  size={50}
- 
+       name="ios-heart-half"
+       color="blue"
+       size={50}
 
-
-/>
+     />
     <Text style={styles.container}> {this.props.text}</Text>
-    <Icon style={styles.container}
+    {/* <Icon style={styles.container}
     name="ios-tv"
-  color="green"
-  size={25}
-  paddingLeft={5}
- 
-
-  
-
-/>
+    color="green"
+    size={25}
+    paddingLeft={5}
+    />
     <Icon
     name="ios-send"
-  color="green"
-  size={25}
-
-  
-
-/>
+    color="green"
+    size={25}
+       /> */}
 
             </View>
         )

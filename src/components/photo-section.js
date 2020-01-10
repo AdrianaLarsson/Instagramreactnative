@@ -1,63 +1,132 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, FlatList, TouchableWithoutFeedback, TouchableHighlight } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
+import axios from 'axios';
+
 
 
 export default class PhotoSection extends Component {
 
-  render() {
-    return (
-      <View style={styles.container}>
-          
-          <View style={styles.thumbnailSection}>
-              <Image 
-              
-              
-              style={styles.thumbnail}
-              source={{uri:'https://scontent-arn2-1.xx.fbcdn.net/v/t1.0-9/67453450_10156524290021239_3382504324348248064_o.jpg?_nc_cat=107&_nc_oc=AQlmWTRg0VhULGEVdOZvMan82U4XEj-CCNCYxa9Y3Jzrnfu6vBHhTs_DeUI1ZTIQtyo&_nc_ht=scontent-arn2-1.xx&oh=e56e4807382c6b334b88984a5436d179&oe=5EB003BC'}} />
-              <View style={styles.userContainer}>
-              <Text style={styles.username}>apedrozalarsson</Text>
-              </View>
-          </View>
-          <View>
-                <Image
-                 style={{width: null, height: 300}}
-                source={{uri:'https://scontent-arn2-2.xx.fbcdn.net/v/t1.0-9/19149298_10154724922311239_68018037886758955_n.jpg?_nc_cat=100&_nc_oc=AQk_23BiaiVCcGQCzuJFptR8tjKNG49kYgTIs0-Nu5R6xfFRGT_EJT7TdBOmg--JS4M&_nc_ht=scontent-arn2-2.xx&oh=5d5d551d31e1dcb9956b23c8f0e05b32&oe=5EA9D14C'}} />
-          </View>
-          <View style={styles.likebutton}>
+
+  constructor(){
+    super()
+    this.like = false
+    this.state ={
+      dataSource: [],
+      heartIcon: 'ios-heart-empty'
+    }
     
-               <Icon
-  name="ios-heart-empty"
-  color="green"
-  size={25}
+    
+  }
 
+  toggleLike () {
 
-/>
-<Icon style={{paddingLeft: 13}}
-  name="ios-create"
-  color="green"
-  size={25}
-
+    
+    this.like = !this.like
+    if (this.like){
+      this.setState({heartIcon: 'ios-heart-empty'})
+      console.log('heartIcon: ios-heart-empty')
+    }else{
+      this.setState({heartIcon: 'ios-heart'})
+      console.log('heartIcon: ios-heart')
+    }
+  }
   
-
-/>
-
-               <Icon style={{paddingLeft: 13}}
-  name="ios-send"
-  color="green"
-  size={25}
-
+  renderItem = ({item }) => {
   
+    return(
 
-/>
+      <View style={styles.container}>
+        <View style={styles.userContainer}>
+    <Text>{item.name.first} {item.name.last}</Text>
+     
+            <Text style={styles.username}></Text>
+            <Text>{item.login.username}</Text>
+            <Image 
+           
+          style={{width: 100, height: 100, borderRadius: 50}}
+           source={{uri: item.picture.thumbnail }}
+             />
 
           </View>
-          <View style={styles.imageMeta}> 
-          <Text style={styles.caption}>Gillas av ..</Text>
-              <Text style={styles.username}>apedrozalarsson</Text>
-              
-          </View>
+    <View >
+      
+      {item.gender =='female'?  <Text>Kvinna</Text>: null}
+      {item.gender == 'male'? <Text>Man</Text>: null}
       </View>
+        <View>
+       
+
+        </View>
+        <View >
+
+<Text>{item.email}</Text>
+
+    </View >
+  
+        <View style={styles.likebutton}>
+        <TouchableHighlight>
+             <Icon 
+             
+                name={this.state.heartIcon}
+                color='#f0f'
+                size={25}
+                onPress={this.toggleLike.bind(this)}
+             />
+         </TouchableHighlight>
+ 
+            <Icon style={{paddingLeft: 13}}
+            name="ios-create"
+            color="#f0f"
+            size={25}
+            />
+
+             <Icon style={{paddingLeft: 13}}
+             name="ios-send"
+             color="#f0f"
+             size={25} 
+             />
+        </View>
+
+        
+
+
+      </View>
+
+    )
+  }
+  
+  
+componentDidMount() {
+  const url = 'https://randomuser.me/api/?results=1'
+    fetch(url)
+    .then((response) => response.json())
+   
+    .then((responseJson) => {
+    this.setState({
+      dataSource: responseJson.results
+  
+    })
+    console.log(responseJson)
+
+    })
+    .catch((error) =>{
+      console.log(error)
+    })
+}
+
+  render() {
+    
+    return (
+
+      <View>
+
+      <FlatList 
+      data={this.state.dataSource}
+      renderItem={this.renderItem}
+      />
+    </View>
+      
     );
   }
 }
@@ -75,15 +144,17 @@ const styles = {
         borderRadius: 25,
     },userContainer: {
         justifyContent: 'center',
-        margin: 10,
+        margin: 8,
         paddingTop: 2,
+        flexDirection: 'row',
     },imageMeta: {
        // flexDirection: 'row',
         paddingRight: 5,
     },username: {
         fontWeight: 'bold',
-        padding: 2,
-        paddingRight: 5
+        padding: 20,
+       
+       
     }, likebutton: {
        flexDirection: 'row',
        padding: 3
@@ -94,3 +165,4 @@ const styles = {
       padding: 10,
     }
 }
+
