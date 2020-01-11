@@ -7,6 +7,12 @@ import PhotoSection from './src/components/photo-section'
 import Todo from './src/components/todo'
 import Note from './src/components/note'
 import Middle from './src/components/middle'
+import FirstScreen from './src/components/firstScreen'
+import AddScreen from './src/components/addScreen'
+import ListScreen from './src/components/listScreen'
+
+
+
 
 
 class HomeScreen extends React.Component {
@@ -45,9 +51,43 @@ class SettingsScreen extends React.Component {
   }
 }
 
+class AdddS extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+       
+
+        <AddScreen />
+       
+        
+      </View>
+    );
+  }
+}
+
+class ListS extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+       
+
+        <ListScreen />
+       
+        
+      </View>
+    );
+  }
+}
+
+
+
 const TabNavigator = createBottomTabNavigator({
   Home: HomeScreen,
   Todo: SettingsScreen,
+  ListS: ListS,
+  AdddS:AdddS
+ 
+
 });
 
 export default createAppContainer(TabNavigator);

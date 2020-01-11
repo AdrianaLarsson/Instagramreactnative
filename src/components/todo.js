@@ -2,7 +2,25 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import Note from './note'
 
-export default class odo extends Component {
+// import * as firebase from 'firebase'
+
+//     /* // Your web app's Firebase configuration */
+//     const firebaseConfig = {
+//         apiKey: "AIzaSyD84K4jUQwDFuE8SAW_JeggNBkbbIRz44s",
+//         authDomain: "dummy-7249d.firebaseapp.com",
+//         databaseURL: "https://dummy-7249d.firebaseio.com",
+//         projectId: "dummy-7249d",
+//         storageBucket: "dummy-7249d.appspot.com",
+//         messagingSenderId: "982753767618",
+//         appId: "1:982753767618:web:b79b5122faa8b7a805cb5b",
+//         measurementId: "G-5HY1H69R04"
+//       };
+//       firebase.initializeApp(firebaseConfig);
+
+export default class Todo extends Component {
+
+  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -12,6 +30,8 @@ export default class odo extends Component {
     };
   }
 
+
+  
   render() {
     let notes = this.state.noteArray.map((val, key)=>{
         return <Note key={key} keyval={key} val={val}
