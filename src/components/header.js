@@ -11,8 +11,34 @@ export default class Header extends Component{
        size={50}
 
      />
-    <Text style={styles.container}> {this.props.text}</Text>
-    {/* <Icon style={styles.container}
+
+    <Text style={styles.text}> Adrianas Dummy app</Text>
+    
+
+            </View>
+        )
+    }
+}
+
+const styles = {
+    container:{
+        backgroundColor: '#f8f8f8',
+        paddingTop: 14,
+        alignItems: 'center',
+        borderBottomColor: '#ddd',
+        borderBottomWidth: 3,
+    },
+    text:{
+        fontSize: 18,
+        fontWeight: 'bold',
+        margin: 13,
+       
+    }
+
+
+}
+
+   {/* <Icon style={styles.container}
     name="ios-tv"
     color="green"
     size={25}
@@ -23,31 +49,3 @@ export default class Header extends Component{
     color="green"
     size={25}
        /> */}
-
-            </View>
-        )
-    }
-}
-
-const styles = {
-    container: {
-        backgroundColor: "lightblue",
-        paddingRight: 30,
-        paddingLeft: 14,
-        paddingBottom: 5,
-         paddingTop: 20,
-         alignItems: 'center',
-         borderBottomColor: 'darkblue',
-         borderBottomWidth: 2,
-         flexDirection: 'row',
-         fontWeight: 'bold'
-         
-       
-    },
-    text:{
-        fontSize: 15,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        margin: 5
-    }
-}
